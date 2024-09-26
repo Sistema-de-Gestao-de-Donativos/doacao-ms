@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  doacao-ms:
+    build: ./
+    container_name: doacao-ms
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+  
+  mysql:
+    image: mysql:latest
+    container_name: db_doacao
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_doacao
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
