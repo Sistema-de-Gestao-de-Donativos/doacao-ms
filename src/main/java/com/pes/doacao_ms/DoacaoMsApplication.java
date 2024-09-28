@@ -8,8 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class DoacaoMsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DoacaoMsApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(DoacaoMsApplication.class, args);
+    }
 }
