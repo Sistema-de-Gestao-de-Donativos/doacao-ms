@@ -4,8 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class ItemIdRequest {
+public class IncludeOrUpdateItemRequest {
 
-    @NotBlank(message = "Id is required")
     private Long id;
+
+    @NotBlank(message = "Name is required")
+    private String name;
+
+    private Integer quantity;
 }
