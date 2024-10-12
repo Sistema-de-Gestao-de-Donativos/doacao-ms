@@ -2,6 +2,8 @@ package com.pes.doacao_ms.configs.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -13,4 +15,11 @@ import org.springframework.context.annotation.Configuration;
         ))
 public class OpenApiConfig {
     // Outras configurações específicas podem ser adicionadas aqui.
+    @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("public")
+                .pathsToMatch("/**")
+                .build();
+    }
 }
