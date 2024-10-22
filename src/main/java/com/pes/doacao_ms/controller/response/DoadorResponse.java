@@ -10,5 +10,5 @@ public class DoadorResponse {
     private String document;
     private String email;
     private String phone;
-    private Long nroDoacoes;
+    private Long donationsNumber;
 }

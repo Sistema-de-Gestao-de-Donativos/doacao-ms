@@ -15,7 +15,7 @@ public class DoadorMapper {
         doadorResponse.setDocument(doador.getDocument());
         doadorResponse.setEmail(doador.getEmail());
         doadorResponse.setPhone(doador.getPhone());
-        doadorResponse.setNroDoacoes(doador.getNroDoacoes());
+        doadorResponse.setDonationsNumber(doador.getDonationsNumber());
 
         return doadorResponse;
     }

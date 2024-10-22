@@ -18,6 +18,7 @@ public interface DoacaoRepository extends JpaRepository<Doacao,Long> {
     List<Doacao> findByIdItem(String idItem);
 
 
+    // TODO arrumar esses finds by data
     List<Doacao> findByDataDoacao(ZonedDateTime dataDoacao);
     List<Doacao> findByDataDoacaoBetween(ZonedDateTime startDate,ZonedDateTime endDate);
     List<Doacao> findAllByOrderByDataDoacaoAsc();

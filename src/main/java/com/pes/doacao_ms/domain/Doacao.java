@@ -23,5 +23,5 @@ public class Doacao {
     private Integer qtd;
     
     @Column(name = "data_doacao")
-    private ZonedDateTime dataDoacao;
+    private ZonedDateTime dataDoacao; // TODO mudar isso dps
 }
