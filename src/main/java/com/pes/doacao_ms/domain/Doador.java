@@ -16,4 +16,5 @@ public class Doador {
     private String document;
     private String email;
     private String phone;
+    private Long qtdDoada;
 }

@@ -14,4 +14,8 @@ public class Item {
 
     private String name;
     private Integer quantity;
+    private String validade;
+    private String unidade;
+    private String categoria;
+
 }

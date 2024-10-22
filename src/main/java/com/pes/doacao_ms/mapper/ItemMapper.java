@@ -1,6 +1,7 @@
 package com.pes.doacao_ms.mapper;
 
 import com.pes.doacao_ms.controller.request.IncludeOrUpdateItemRequest;
+import com.pes.doacao_ms.controller.request.ItemDoado;
 import com.pes.doacao_ms.controller.response.ItemIdResponse;
 import com.pes.doacao_ms.controller.response.ItemResponse;
 import com.pes.doacao_ms.domain.Item;
@@ -46,6 +47,18 @@ public class ItemMapper {
         } else {
             item.setQuantity(item.getQuantity() + ONE_ITEM);
         }
+
+        return item;
+    }
+
+    public static Item donatedToItem(ItemDoado itemDoado){
+        Item item = new Item();
+
+        item.setCategoria(itemDoado.getCategoria());
+        item.setName(itemDoado.getNome());
+        item.setQuantity(itemDoado.getQtd());
+        item.setUnidade(itemDoado.getUnidade());
+        item.setValidade(itemDoado.getValidade());
 
         return item;
     }
