@@ -62,4 +62,14 @@ public class ItemMapper {
 
         return item;
     }
+
+    public static Item donatedToModify(Item item, ItemDoado request) {
+        if (request.getQtd() != null) {
+            item.setQuantity(item.getQuantity() + request.getQtd());
+        } else {
+            item.setQuantity(item.getQuantity() + ONE_ITEM);
+        }
+
+        return item;
+    }
 }

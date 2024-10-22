@@ -29,9 +29,16 @@ public class DoadorService {
 
     public DoadorIdResponse include(IncludeDoadorRequest request) {
         Doador doador = toEntity(request);
+        doador.setNroDoacoes(0L);
 
         doadorRepository.save(doador);
 
         return toIdResponse(doador);
+    }
+
+    public void atualizaQtd(Long codDoador, int nroDoacoes){
+        Doador doador = doadorRepository.findById(codDoador).get();
+        doador.setNroDoacoes(doador.getNroDoacoes() + Integer.toUnsignedLong(nroDoacoes));
+        doadorRepository.save(doador);
     }
 }

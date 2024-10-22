@@ -12,9 +12,9 @@ import com.pes.doacao_ms.controller.request.DoacaoRequest;
 import com.pes.doacao_ms.controller.request.GetDoacaoRequest;
 import com.pes.doacao_ms.controller.request.ItemDoado;
 import com.pes.doacao_ms.controller.response.DoacaoResponse;
-import com.pes.doacao_ms.domain.Item;
-import com.pes.doacao_ms.mapper.ItemMapper;
 import com.pes.doacao_ms.service.DoacaoService;
+import com.pes.doacao_ms.service.DoadorService;
+import com.pes.doacao_ms.service.ItemService;
 
 import jakarta.validation.Valid;
 
@@ -29,22 +29,30 @@ public class DoacaoController {
     @Autowired
     DoacaoService doacaoService;
 
+    @Autowired
+    ItemService itemService;
+
+    @Autowired
+    DoadorService doadorService;
+
     @PostMapping
     public List<DoacaoResponse> receiveDoacao(@Valid @RequestBody DoacaoRequest doacao){
         Long codCD = doacao.getCodCD();
         Long codDoador = doacao.getCodDoador();
         List<ItemDoado> itens = doacao.getItens();
-        Item item;
+        Long idItem;
         List<DoacaoResponse> responses = new LinkedList<>();
         for (ItemDoado it : itens) {
-            // item = ItemMapper::meuMap(it);
-            item = ItemMapper.donatedToItem(it);
+            idItem = itemService.includeName(it).getId();// TODO perguntar ao estoque pela existencia do item
             
-            responses.add(doacaoService.saveDoacao(codCD, codDoador, item.getId(), item.getQuantity()));
+            responses.add(doacaoService.saveDoacao(codCD, codDoador, idItem, it.getQtd()));
         }
+        doadorService.atualizaQtd(codDoador, responses.size());
+        // TODO enviar os itens para o estoque 
         return responses;
     }
 
+    // TODO adicionar outras formas de get. Ex.: data, CD, doador, item
     @GetMapping
     public DoacaoResponse getDoacao(@Valid @RequestBody GetDoacaoRequest getDoacao){
         return doacaoService.getDoacao(getDoacao.getIdDoacao());

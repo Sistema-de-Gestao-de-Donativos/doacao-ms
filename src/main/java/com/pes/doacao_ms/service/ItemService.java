@@ -1,6 +1,7 @@
 package com.pes.doacao_ms.service;
 
 import com.pes.doacao_ms.controller.request.IncludeOrUpdateItemRequest;
+import com.pes.doacao_ms.controller.request.ItemDoado;
 import com.pes.doacao_ms.controller.response.ItemIdResponse;
 import com.pes.doacao_ms.domain.Item;
 import com.pes.doacao_ms.repository.ItemRepository;
@@ -27,6 +28,22 @@ public class ItemService {
         } else {
             // Item existe, incrementa quantidade
             item = toModify(optionalItem.get(), request);
+        }
+
+        itemRepository.save(item);
+        return toIdResponse(item);
+    }
+
+    public ItemIdResponse includeName(ItemDoado request) {
+        Item item;
+        Optional<Item> optionalItem = itemRepository.findByName(request.getNome());
+
+        // Item recebido não existe, cria novo Item
+        if ((optionalItem.isEmpty())) {
+            item = donatedToItem(request);
+        } else {
+            // Item existe, incrementa quantidade
+            item = donatedToModify(optionalItem.get(), request);
         }
 
         itemRepository.save(item);
