@@ -54,7 +54,7 @@ public class DoacaoController {
         for (ItemDoado it : itens) {
             idItem = itemService.includeName(it).getId();// TODO perguntar ao estoque pela existencia do item
 
-            idItem = verifyItemInStock(it.getNome(),codCD);
+            // idItem = verifyItemInStock(it.getNome(),codCD);
             
             responses.add(doacaoService.saveDoacao(codCD, codDoador, idItem, it.getQtd()));
         }
@@ -64,18 +64,18 @@ public class DoacaoController {
         return responses;
     }
 
-    private Long verifyItemInStock(String nameItem, Long codCd){
+    // private Long verifyItemInStock(String nameItem, Long codCd){
         
-        String url = baseUrl+path+Long.toString(codCd);
-        ResponseEntity<Long> response = restTemplate.getForEntity(url, Long.class);
+    //     String url = baseUrl+path+Long.toString(codCd);
+    //     ResponseEntity<Long> response = restTemplate.getForEntity(url, Long.class);
 
-        return response.getBody();
-    }
+    //     return response.getBody();
+    // }
 
-    private void sendItemsToStock(Long codCd, List<ItemDoado> items){
-        String url = baseUrl+path+Long.toString(codCd);
-        restTemplate.postForEntity(url, items, Void.class);
-    }
+    // private void sendItemsToStock(Long codCd, List<ItemDoado> items){
+    //     String url = baseUrl+path+Long.toString(codCd);
+    //     restTemplate.postForEntity(url, items, Void.class);
+    // }
 
     // TODO adicionar outras formas de get. Ex.: data, CD, doador, item
     @GetMapping
