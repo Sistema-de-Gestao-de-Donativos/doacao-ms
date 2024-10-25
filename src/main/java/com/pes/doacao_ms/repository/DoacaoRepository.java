@@ -1,14 +1,12 @@
 package com.pes.doacao_ms.repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pes.doacao_ms.domain.Doacao;
-import java.util.Optional;
-import java.util.List;
-import java.time.ZonedDateTime;
-
-
-
 
 public interface DoacaoRepository extends JpaRepository<Doacao,Long> {
     
@@ -19,8 +17,7 @@ public interface DoacaoRepository extends JpaRepository<Doacao,Long> {
 
 
     // TODO arrumar esses finds by data
-    List<Doacao> findByDataDoacao(ZonedDateTime dataDoacao);
-    List<Doacao> findByDataDoacaoBetween(ZonedDateTime startDate,ZonedDateTime endDate);
-    List<Doacao> findAllByOrderByDataDoacaoAsc();
+    List<Doacao> findByDataDoacaoBetween(LocalDateTime startDate, LocalDateTime endDate);
+    // List<Doacao> findAllByOrderByDataDoacaoAsc();
 
 }

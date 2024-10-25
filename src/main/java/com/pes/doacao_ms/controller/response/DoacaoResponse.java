@@ -1,6 +1,6 @@
 package com.pes.doacao_ms.controller.response;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -12,5 +12,5 @@ public class DoacaoResponse {
     private Long idDoador;
     private String idItem;
     private Integer qtd;
-    private ZonedDateTime dataDoacao;
+    private LocalDateTime dataDoacao;
 }

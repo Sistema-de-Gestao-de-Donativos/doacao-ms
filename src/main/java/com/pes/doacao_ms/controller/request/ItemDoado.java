@@ -7,6 +7,8 @@ import lombok.Data;
 public class ItemDoado {
     
     @NotBlank
+    private String codBarras;
+    @NotBlank
     private String nome;
     @NotBlank
     private String validade;

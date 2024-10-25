@@ -1,5 +1,12 @@
 package com.pes.doacao_ms.service;
 
+import static com.pes.doacao_ms.mapper.DoadorMapper.*;
+import static org.springframework.http.HttpStatus.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.pes.doacao_ms.controller.request.EmailRequest;
 import com.pes.doacao_ms.controller.request.IncludeDoadorRequest;
 import com.pes.doacao_ms.controller.response.DoadorIdResponse;
@@ -7,13 +14,6 @@ import com.pes.doacao_ms.controller.response.DoadorResponse;
 import com.pes.doacao_ms.domain.Doador;
 import com.pes.doacao_ms.mapper.DoadorMapper;
 import com.pes.doacao_ms.repository.DoadorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import static com.pes.doacao_ms.mapper.DoadorMapper.toEntity;
-import static com.pes.doacao_ms.mapper.DoadorMapper.toIdResponse;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class DoadorService {

@@ -14,7 +14,7 @@ WORKDIR /app
 COPY --from=build /app/target/doacao-ms-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Exponha a porta que a aplicação Spring Boot está usando (por padrão, muitas vezes é 8080)
-EXPOSE 8080
+EXPOSE 8083
 
 # Comando para iniciar a aplicação quando o contêiner for executado
 CMD ["java", "-jar", "app.jar"]

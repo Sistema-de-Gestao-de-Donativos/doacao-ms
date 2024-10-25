@@ -54,6 +54,7 @@ public class ItemMapper {
     public static Item donatedToItem(ItemDoado itemDoado){
         Item item = new Item();
 
+        item.setCodBarras(itemDoado.getCodBarras());
         item.setCategoria(itemDoado.getCategoria());
         item.setName(itemDoado.getNome());
         item.setQuantity(itemDoado.getQtd());

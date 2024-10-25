@@ -1,23 +1,17 @@
 package com.pes.doacao_ms.mapper;
 
-import java.time.ZonedDateTime;
-
 import com.pes.doacao_ms.controller.response.DoacaoResponse;
 import com.pes.doacao_ms.domain.Doacao;
 
 public class DoacaoMapper {
     
-    public static Doacao toEntity(Long codCD, Long codDoador, String idItem, Integer qtd){
+    public static Doacao toEntity(Long codCD, Long codDoador, Long idItem, Integer qtd){
         Doacao entity = new Doacao();
 
         entity.setCodCD(codCD);
         entity.setIdDoador(codDoador);
-        entity.setIdItem(idItem);
-        
-
+        entity.setIdItem(String.valueOf(idItem));
         entity.setQtd(qtd);
-        // entity.setIdItem(item.get);
-        entity.setDataDoacao(ZonedDateTime.now());
 
         return entity;
     }
