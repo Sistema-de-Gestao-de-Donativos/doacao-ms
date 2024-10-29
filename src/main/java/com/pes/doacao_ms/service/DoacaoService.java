@@ -18,8 +18,8 @@ public class DoacaoService {
     DoacaoRepository doacaoRepository;
     
 
-    public DoacaoResponse saveDoacao(Long codCD, Long codDoador, Long itemID, Integer qtd){
-        Doacao d = DoacaoMapper.toEntity(codCD, codDoador, String.valueOf(itemID), qtd);
+    public DoacaoResponse saveDoacao(Long codCD, Long codDoador, String itemID, Integer qtd){
+        Doacao d = DoacaoMapper.toEntity(codCD, codDoador, itemID, qtd);
         
         doacaoRepository.save(d);
 
