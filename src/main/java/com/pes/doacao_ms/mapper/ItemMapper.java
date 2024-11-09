@@ -54,12 +54,12 @@ public class ItemMapper {
     public static Item donatedToItem(ItemDoado itemDoado){
         Item item = new Item();
 
-        item.setCodBarras(itemDoado.getCodBarras());
+        // item.setCodBarras(itemDoado.getCodBarras());
         item.setCategoria(itemDoado.getCategoria());
         item.setName(itemDoado.getNome());
         item.setQuantity(itemDoado.getQtd());
         item.setUnidade(itemDoado.getUnidade());
-        item.setValidade(itemDoado.getValidade());
+        // item.setValidade(itemDoado.getValidade());
 
         return item;
     }

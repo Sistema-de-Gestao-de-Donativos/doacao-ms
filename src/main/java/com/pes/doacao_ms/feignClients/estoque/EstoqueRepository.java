@@ -1,5 +1,7 @@
 package com.pes.doacao_ms.feignClients.estoque;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.pes.doacao_ms.domain.EstoqueItem;
@@ -16,33 +18,33 @@ public class EstoqueRepository {
     private final EstoqueClient estoqueClient;
     private final EstoqueConverter estoqueConverter;
 
-    public void cadastrarItem(final EstoqueItem item){
+    public void cadastrarItem(final Integer codCd, final List<EstoqueItem> item){
         log.info("Cadastrando item no estoque: {}", item);
-        EstoqueItemDTO estoqueItemDTO = estoqueConverter.estoqueItemToEstoqueItemDTO(item);
-        estoqueClient.cadastrarItem(estoqueItemDTO);
+        List<EstoqueItemDTO> estoqueItemDTO = estoqueConverter.estoqueItemToEstoqueItemDTO(item);
+        estoqueClient.cadastrarItem(codCd,estoqueItemDTO);
     }
 
-    public EstoqueItem buscarItemEstoque(final String codigoItem){
+    public List<EstoqueItem> buscarItemEstoque(final Long codCd, final String codigoItem){
         log.info("Buscando item no estoque com código: {}", codigoItem);
-        EstoqueItemDTO estoqueItemDTO = estoqueClient.buscarItem(codigoItem);
+        List<EstoqueItemDTO> estoqueItemDTO = estoqueClient.buscarItem(codigoItem, codCd);
         return estoqueConverter.estoqueItemDTOToEstoqueItem(estoqueItemDTO);
     }
 
-    public Long verificaItemEstoque(Long codCd, String nameItem) {
+    // public Long verificaItemEstoque(Long codCd, String nameItem) {
 
-        try {
-            log.info("Verificando item no estoque com nome {} no CD {}", nameItem, codCd);
-            return estoqueClient.verificaItemEstoque(nameItem, codCd);
-        } catch (Exception e) {
-            log.info("Item não encontrado: {}", e.getMessage());
-            return -1L;
-        }
-    }
+    //     try {
+    //         log.info("Verificando item no estoque com nome {} no CD {}", nameItem, codCd);
+    //         return estoqueClient.verificaItemEstoque(nameItem, codCd);
+    //     } catch (Exception e) {
+    //         log.info("Item não encontrado: {}", e.getMessage());
+    //         return -1L;
+    //     }
+    // }
 
-    public void atualizarItem(final EstoqueItem item) {
-        log.info("Atualizando item no estoque: {}", item);
-        EstoqueItemDTO estoqueItemDTO = estoqueConverter.estoqueItemToEstoqueItemDTO(item);
-        estoqueClient.atualizarItem(estoqueItemDTO);
-    }
+    // public void atualizarItem(final EstoqueItem item) {
+    //     log.info("Atualizando item no estoque: {}", item);
+    //     EstoqueItemDTO estoqueItemDTO = estoqueConverter.estoqueItemToEstoqueItemDTO(item);
+    //     estoqueClient.atualizarItem(estoqueItemDTO);
+    // }
     
 }

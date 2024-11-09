@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.pes.doacao_ms.controller.request.DoacaoRequest;
-import com.pes.doacao_ms.controller.request.ItemDoado;
+// import com.pes.doacao_ms.controller.request.ItemDoado;
 import com.pes.doacao_ms.controller.response.DoacaoResponse;
 import com.pes.doacao_ms.domain.Doacao;
 import com.pes.doacao_ms.mapper.DoacaoMapper;
@@ -37,7 +37,9 @@ public class DoacaoService {
 
         doacao.getItens().stream()
         .forEach(item -> {
-            Long idItem = itemService.includeName(item).getId();
+            // Long idItem = itemService.includeName(item).getId();
+            // fazer request do item
+            String idItem = estoqueService.buscarItemEstoque(doacao.getCodCD(), item.getNome()).get(0)._id();
             Doacao d = DoacaoMapper.toEntity(doacao.getCodCD(), doacao.getCodDoador(), idItem, item.getQtd());
             doacaoRepository.save(d);
 
@@ -45,7 +47,10 @@ public class DoacaoService {
             //atualizaEstoque(item, doacao.getCodCD());
         });
 
+        estoqueService.cadastrarItem(doacao.getCodCD().intValue(),doacao.getItens());
         doadorService.updateDonationsNumber(doacao.getCodDoador(),  doacao.getItens().size());
+        // fazer o post
+        
     }
 
     public DoacaoResponse getDoacao(Long idDoacao){
@@ -63,14 +68,14 @@ public class DoacaoService {
         .toList();
     }
 
-    private void atualizaEstoque(ItemDoado itemDoado,Long codCd){
-        Long idItem = estoqueService.verifyItemInStock(codCd, itemDoado.getNome());
+    // private void atualizaEstoque(ItemDoado itemDoado,Long codCd){
+    //     Long idItem = estoqueService.verifyItemInStock(codCd, itemDoado.getNome());
 
-        if(idItem < 0){
-            estoqueService.cadastrarItem(itemDoado);
-        }
-        else{
-            estoqueService.atualizarItem(itemDoado);
-        }
-    }
+    //     if(idItem < 0){
+    //         estoqueService.cadastrarItem(itemDoado);
+    //     }
+    //     else{
+    //         estoqueService.atualizarItem(itemDoado);
+    //     }
+    // }
 }

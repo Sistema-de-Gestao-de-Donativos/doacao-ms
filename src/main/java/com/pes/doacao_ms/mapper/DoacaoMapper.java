@@ -5,12 +5,12 @@ import com.pes.doacao_ms.domain.Doacao;
 
 public class DoacaoMapper {
     
-    public static Doacao toEntity(Long codCD, Long codDoador, Long idItem, Integer qtd){
+    public static Doacao toEntity(Long codCD, Long codDoador, String idItem, Integer qtd){
         Doacao entity = new Doacao();
 
         entity.setCodCD(codCD);
         entity.setIdDoador(codDoador);
-        entity.setIdItem(String.valueOf(idItem));
+        entity.setIdItem(idItem);
         entity.setQtd(qtd);
 
         return entity;

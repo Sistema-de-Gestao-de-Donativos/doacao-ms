@@ -1,5 +1,7 @@
 package com.pes.doacao_ms.feignClients.estoque;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -10,7 +12,7 @@ import com.pes.doacao_ms.dtos.EstoqueItemDTO;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EstoqueConverter {
 
-    EstoqueItem estoqueItemDTOToEstoqueItem(EstoqueItemDTO estoqueItemDTO);
+    List<EstoqueItem> estoqueItemDTOToEstoqueItem(List<EstoqueItemDTO> estoqueItemDTO);
 
-    EstoqueItemDTO estoqueItemToEstoqueItemDTO(EstoqueItem estoqueItem);
+    List<EstoqueItemDTO> estoqueItemToEstoqueItemDTO(List<EstoqueItem> estoqueItem);
 }
