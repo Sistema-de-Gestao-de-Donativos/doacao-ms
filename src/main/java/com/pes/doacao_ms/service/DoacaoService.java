@@ -35,6 +35,11 @@ public class DoacaoService {
 
     public void saveDoacao(DoacaoRequest doacao){
 
+        // Assumimos que o front vai consultar a API e enviar itens válidos.
+        // Primeiro cadastramos os itens no estoque para garantir que o item 
+        // exista na hora de buscar o id.
+        estoqueService.cadastrarItem(doacao.getCodCD().intValue(),doacao.getItens());
+
         doacao.getItens().stream()
         .forEach(item -> {
             // Long idItem = itemService.includeName(item).getId();
@@ -47,7 +52,6 @@ public class DoacaoService {
             //atualizaEstoque(item, doacao.getCodCD());
         });
 
-        estoqueService.cadastrarItem(doacao.getCodCD().intValue(),doacao.getItens());
         doadorService.updateDonationsNumber(doacao.getCodDoador(),  doacao.getItens().size());
         // fazer o post
         
