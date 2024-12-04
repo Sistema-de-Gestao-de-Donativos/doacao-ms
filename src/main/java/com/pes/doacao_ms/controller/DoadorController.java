@@ -1,10 +1,20 @@
 package com.pes.doacao_ms.controller;
 
-import com.pes.doacao_ms.controller.request.EmailRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.pes.doacao_ms.controller.request.IncludeDoadorRequest;
 import com.pes.doacao_ms.controller.response.DoadorIdResponse;
 import com.pes.doacao_ms.controller.response.DoadorResponse;
 import com.pes.doacao_ms.service.DoadorService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,13 +22,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/v1/doador")
 @CrossOrigin(origins = "*")
 @SecurityRequirement(name = "bearerAuth")
+@Validated
 public class DoadorController {
 
     @Autowired
@@ -30,9 +41,9 @@ public class DoadorController {
             @ApiResponse(responseCode = "400", description = "Invalid request body", content = @Content(mediaType = "application/json", schema = @Schema(example = "{\"error\": \"Invalid request body\"}"))),
             @ApiResponse(responseCode = "404", description = "Doador not found", content = @Content(mediaType = "application/json", schema = @Schema(example = "{\"error\": \"Doador not found\"}"))),
     })
-    @GetMapping
-    public DoadorResponse get(@Valid @RequestBody EmailRequest emailRequest) {
-        return doadorService.getDoador(emailRequest);
+    @GetMapping("/{email}")
+    public DoadorResponse get(@PathVariable @Email(message = "E-mail inválido") @NotBlank(message = "O e-mail não pode ser vazio") String email) {
+        return doadorService.getDoador(email);
     }
 
     @Operation(summary = "Create a new Doador.", description = "Create a new Doador using the given request.")
