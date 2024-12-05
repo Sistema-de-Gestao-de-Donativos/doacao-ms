@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.pes.doacao_ms.controller.request.EmailRequest;
 import com.pes.doacao_ms.controller.request.IncludeDoadorRequest;
 import com.pes.doacao_ms.controller.response.DoadorIdResponse;
 import com.pes.doacao_ms.controller.response.DoadorResponse;
@@ -20,8 +21,8 @@ public class DoadorService {
     @Autowired
     DoadorRepository doadorRepository;
 
-    public DoadorResponse getDoador(String email) {
-        return doadorRepository.findByEmailIgnoreCase(email)
+    public DoadorResponse getDoador(EmailRequest email) {
+        return doadorRepository.findByEmailIgnoreCase(email.getEmail())
                 .map(DoadorMapper::toResponse)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Doador not found"));
     }
